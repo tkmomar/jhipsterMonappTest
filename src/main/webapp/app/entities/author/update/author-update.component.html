@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-author-heading" data-cy="AuthorCreateUpdateHeading" jhiTranslate="monAppTestApp.author.home.createOrEditLabel">
+        Créer ou éditer un Author
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="monAppTestApp.author.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let lastnameRef = editForm.get('lastname')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_lastname" jhiTranslate="monAppTestApp.author.lastname">Lastname</label>
+          <input type="text" class="form-control" name="lastname" id="field_lastname" data-cy="lastname" formControlName="lastname" />
+          @if (lastnameRef.invalid && (lastnameRef.dirty || lastnameRef.touched)) {
+            <div>
+              @if (editForm.get('lastname')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let firstnameRef = editForm.get('firstname')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_firstname" jhiTranslate="monAppTestApp.author.firstname">Firstname</label>
+          <input type="text" class="form-control" name="firstname" id="field_firstname" data-cy="firstname" formControlName="firstname" />
+          @if (firstnameRef.invalid && (firstnameRef.dirty || firstnameRef.touched)) {
+            <div>
+              @if (editForm.get('firstname')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_style" jhiTranslate="monAppTestApp.author.style">Style</label>
+          <input type="text" class="form-control" name="style" id="field_style" data-cy="style" formControlName="style" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+entity Post {
+	title String required,
+	content String,
+	dateCreation ZonedDateTime
+}
+entity Category {
+	name String required
+}
+
+entity Author {
+	lastname String required,
+	firstname String required,
+	style String
+}
+
+relationship ManyToOne {
+	Post to Category{Post}
+	Post to Author{Post}
+}
+
+service * with serviceImpl
+paginate * with pagination
+dto * with mapstruct
+
+filter *
+
+

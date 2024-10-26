@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (author(); as authorRef) {
+      <div>
+        <h2 data-cy="authorDetailsHeading"><span jhiTranslate="monAppTestApp.author.detail.title">Author</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ authorRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="monAppTestApp.author.lastname">Lastname</span></dt>
+          <dd>
+            <span>{{ authorRef.lastname }}</span>
+          </dd>
+          <dt><span jhiTranslate="monAppTestApp.author.firstname">Firstname</span></dt>
+          <dd>
+            <span>{{ authorRef.firstname }}</span>
+          </dd>
+          <dt><span jhiTranslate="monAppTestApp.author.style">Style</span></dt>
+          <dd>
+            <span>{{ authorRef.style }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/author', authorRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>
